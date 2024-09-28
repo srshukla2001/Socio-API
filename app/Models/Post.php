@@ -21,4 +21,8 @@ class Post extends Model
     public function users(){
        return $this->hasOne(User::class,'id','user_id');
     }
+
+    public function comments(){
+        return $this->hasMany(Comment::class,'post_id','id')->orderBy('id','desc');
+    }
 }

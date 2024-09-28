@@ -18,6 +18,7 @@ class IndividualPostResource extends JsonResource
         return [
             'id' => $this->id,
             'description' => $this->description,
+            'comments' => $this->comments,
             'category' => $this->category,
             'created_at' => $this->created_at->diffForHumans(),
             'created_by' => $this->users ? $this->users->username : '',

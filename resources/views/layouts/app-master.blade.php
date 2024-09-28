@@ -27,11 +27,19 @@
       }
 
       body{
-        background-image: url("images/socio2.webp");
-        /* background-repeat: no-repeat; */
-        background-size: 50%;
-        /* background-attachment: fixed;
-        background-position: center; */
+        background-image : url("images/Socio-bg.webp");
+        background-attachment : fixed;
+        background-size: 100%;
+      }
+
+      h1{
+        margin-top: 4px;
+        text-align:center;
+        background-color:gold;
+        display:inline-block;
+        padding:8px;
+        color:red;
+        border-radius: 18px;
       }
     </style>
 

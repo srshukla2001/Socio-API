@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\IndividualPostResource;
 use App\Models\Post;
+use App\Models\Comment;
 
 class UserController extends Controller
 {
@@ -60,6 +61,31 @@ class UserController extends Controller
             $post = Post::where('id',$id)->get();
             
             return new PostResource($post);
+
+        } catch (\Throwable $th) {
+
+            return response()->json([
+                'error' => $th,
+                'message' => 'Technical Error'
+            ],400);
+
+        }
+    }
+
+    public function storeComment(Request $request)
+    {
+        try{
+
+            $comment  = Comment::create([
+                'post_id' => $request->post_id,
+                'comment' => $request->comment,
+                'user_id' => isset(auth()->user()->id) ? auth()->user()->id : 1,
+            ]);
+
+            return response()->json([
+                'message' => 'Comment Added Successfully!',
+                'data' => $comment
+            ],201);
 
         } catch (\Throwable $th) {
 

@@ -1,7 +1,7 @@
 @extends('layouts.auth-master')
 
 @section('content')
-    <form method="post" action="{{ route('login.perform') }}" style="margin:auto;margin-top:60px; border:8px inset SlateBlue;width:50%;background-color:LightGray;">
+    <form method="post" action="{{ route('login.perform') }}">
         
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
         <img class="mb-4" src="{!! url('images/socio1.webp') !!}" alt="" width="80" height="80">

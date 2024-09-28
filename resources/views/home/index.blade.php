@@ -1,14 +1,14 @@
 @extends('layouts.app-master')
 
 @section('content')
-    <!-- <div class="bg-light p-5 rounded">
+    <div class="text-light ">
         @auth
-        <h1>Dashboard</h1>
+        <h1 class="headName">Welcome, {{ auth()->user()->username }}</h1>
         @endauth
 
         @guest
-        <span>Homepage</span>
+        <h1 class="headName">Homepage</h1>
         @endguest
 
-    </div> -->
+    </div>
 @endsection

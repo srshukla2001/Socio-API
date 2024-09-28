@@ -28,12 +28,20 @@
       }
 
       body{
-        background-image: url("images/socio2.webp");
-        /* background-repeat: no-repeat; */
-        background-size: 50%;
-        /* background-attachment: fixed;
-        background-position: center; */
+        background-image : url("images/Socio-bg.webp");
+        background-attachment : fixed;
+        background-size: 100%;
       }
+
+      form{
+        margin:auto;
+        margin-top:60px; 
+        border:8px inset SlateBlue;
+        width:50%;
+        background-color:LightGray;
+        opacity: 0.93;
+      }
+
     </style>
 
     

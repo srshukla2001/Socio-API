@@ -22,6 +22,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::get('allPost','UserController@allPost')->name('api.allPost');
         Route::post('storePost','UserController@storePost')->name('api.storePost');
         Route::get('viewPost/{id}','UserController@viewPost')->name('api.viewPost');
+
+        Route::post('storeComment','UserController@storeComment')->name('api.storeComment');
     });
 });
 
