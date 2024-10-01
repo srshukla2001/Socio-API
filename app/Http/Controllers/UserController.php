@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\IndividualPostResource;
+use App\Http\Resources\ViewPostResponse;
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\Like;
+use App\Models\PostLike;
 
 class UserController extends Controller
 {
@@ -15,7 +18,7 @@ class UserController extends Controller
     {
         try {
 
-            $posts = Post::orderBy('id','desc')->paginate(2);
+            $posts = Post::orderBy('id','desc')->paginate(5);
             
             return new PostResource($posts);
 
@@ -58,9 +61,9 @@ class UserController extends Controller
     public function viewPost($id){
         try {
 
-            $post = Post::where('id',$id)->get();
+            $post = Post::where('id',$id)->first();
             
-            return new PostResource($post);
+            return new ViewPostResponse($post);
 
         } catch (\Throwable $th) {
 
@@ -94,6 +97,84 @@ class UserController extends Controller
                 'message' => 'Technical Error'
             ],400);
 
+        }
+    }
+
+    public function giveLike(Request $request){
+        try {
+
+            $userId = auth()->user() ? auth()->user()->id : 100;
+            $like = Like::updateorCreate([
+                'post_id' => $request->post_id,
+                'like_count' => 0,
+            ]);
+
+            $likeUser = PostLike::where('user_id', $userId)->first();
+
+            if($likeUser == null){
+                PostLike::create([
+                    'like_id' => $like->id,
+                    'user_id' => $userId,
+                ]);
+
+                // $like->update([
+                //     'like_count' => 1
+                // ]);
+
+                $message = 'Liked';
+            }else{
+                PostLike::where('user_id',$userId)->delete();
+
+                // $like->update([
+                //     'like_count' => 1
+                // ]);
+
+                $message = 'DisLiked';
+            }
+
+            return response()->json([
+                'data' => $like,
+                'message' => $message
+            ],201);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'error' => $th,
+                'message' => 'Technical Error'
+            ],400);
+        }
+    }
+
+    public function deletePost($id)
+    {
+        try {
+            Post::where('id',$id)->delete();
+            
+            return response()->json([
+                'message' => 'Post Deleted Successfully!'
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'error' => $th,
+                'message' => 'Technical Error'
+            ],400);
+        }
+    }
+
+    public function deleteComment($id)
+    {
+        try {
+
+            Comment::where('id',$id)->delete();
+            
+            return response()->json([
+                'message' => 'Comment Deleted Successfully!'
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'error' => $th,
+                'message' => 'Technical Error'
+            ],400);
         }
     }
     
