@@ -22,8 +22,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::get('allPost','UserController@allPost')->name('api.allPost');
         Route::post('storePost','UserController@storePost')->name('api.storePost');
         Route::get('viewPost/{id}','UserController@viewPost')->name('api.viewPost');
-
+        Route::post('deletePost/{id}','UserController@deletePost')->name('api.deletePost');
         Route::post('storeComment','UserController@storeComment')->name('api.storeComment');
+        Route::post('deleteComment/{id}','UserController@deleteComment')->name('api.deleteComment');
+        Route::post('giveLike','UserController@giveLike')->name('api.giveLike');
     });
 });
 
