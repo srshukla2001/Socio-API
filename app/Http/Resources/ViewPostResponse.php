@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\ViewCommentResponse;
 
 class ViewPostResponse extends JsonResource
 {
@@ -26,10 +27,11 @@ class ViewPostResponse extends JsonResource
             'id' => $this->response->id,
             'post' => $this->response->description,
             'likes' => $this->response->likes ? $this->response->likes->postlikes->count() : 0,
-            'comments' => $this->response->comments,
-            'category' => $this->response->category,
+            // 'category' => $this->response->category,
             'created_at' => $this->response->created_at->diffForHumans(),
+            'created_date' => $this->response->created_at->format('d-M-y, H:iA'),
             'created_by' => $this->response->users ? $this->response->users->username : '',
+            'comments' => ViewCommentResponse::collection($this->response->comments),
         ];
     }
 }

@@ -20,8 +20,9 @@ class IndividualPostResource extends JsonResource
             'post' => $this->description,
             'likes' => $this->likes ? $this->likes->postlikes->count() : 0,
             'comments' => $this->comments->count(),
-            'category' => $this->category,
+            // 'category' => $this->category,
             'created_at' => $this->created_at->diffForHumans(),
+            'created_date' => $this->created_at->format('d-M-y, H:iA'),
             'created_by' => $this->users ? $this->users->username : '',
         ];
     }
