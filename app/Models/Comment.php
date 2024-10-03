@@ -23,4 +23,9 @@ class Comment extends Model
         return $this->hasOne(Post::class,'id','post_id');
     }
 
+    public function commentusers()
+    {
+        return $this->hasOne(User::class,'id','user_id');
+    }
+
 }
